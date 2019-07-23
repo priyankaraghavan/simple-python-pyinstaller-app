@@ -22,7 +22,7 @@ pipeline {
                 sh 'httpobs www.google.com'
             }            
         }
-        stage('Test'){
+        stage('Security Test'){
             agent {
                 docker {
                     image 'node:8.16.0-jessie' 
