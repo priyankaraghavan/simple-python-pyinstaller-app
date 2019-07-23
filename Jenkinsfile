@@ -20,7 +20,9 @@ pipeline {
             steps {
                 sh 'pip install httpobs-cli'
                 sh 'httpobs www.google.com'
-            }
+            }            
+        }
+        stage('Test'){
             agent {
                 docker {
                     image 'node:8.16.0-jessie' 
@@ -31,5 +33,6 @@ pipeline {
                 sh 'observatory www.google.com'
             }
         }
+
     }
 }
