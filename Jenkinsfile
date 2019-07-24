@@ -33,6 +33,21 @@ pipeline {
                 sh 'observatory www.google.com'
             }
         }
-
-    }
+    
+        stage('Security Test Zap') {
+            steps {
+                script {
+                    startZap(host: "www.google.com", port: 9091, timeout:500, zapHome: "/opt/zaproxy" ) // Start ZAP at /opt/zaproxy/zap.sh, allowing scans on github.com (if allowedHosts is not provided, any local addresses will be used
+                }
+            }
+        }       
+    
+        post {
+            always {
+                script {
+                    archiveZap(failAllAlerts: 1, failHighAlerts: 0, failMediumAlerts: 0, failLowAlerts: 0, falsePositivesFilePath: "zapFalsePositives.json")
+                }
+            }
+        }  
+    }  
 }
