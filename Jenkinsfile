@@ -42,7 +42,7 @@ pipeline {
             }
             steps {
                 script {
-                    startZap(host: "www.google.com", port: 8080, timeout:1500 ,zapHome:"/Applications/OWASP ZAP.app/Contents/Java") // Start ZAP at /opt/zaproxy/zap.sh, allowing scans on github.com (if allowedHosts is not provided, any local addresses will be used
+                    startZap(host: 127.0.0.1, port: 9095, timeout:1500 ,zapHome:"/Applications/OWASP ZAP.app/Contents/Java") // Start ZAP at /opt/zaproxy/zap.sh, allowing scans on github.com (if allowedHosts is not provided, any local addresses will be used
                     runZapCrawler(host: "https://www.google.com")
                 }
             }
