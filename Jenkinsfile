@@ -35,6 +35,7 @@ pipeline {
         }
     
         stage('Security Test Zap') {
+            agent any
             steps {
                 script {
                     startZap(host: "www.google.com", port: 9091, timeout:500, zapHome: "/opt/zaproxy" ) // Start ZAP at /opt/zaproxy/zap.sh, allowing scans on github.com (if allowedHosts is not provided, any local addresses will be used
