@@ -42,7 +42,7 @@ pipeline {
             }
             steps {
                 script {
-                    startZap(host: "www.google.com", port: 9091, timeout:500, zapHome: "/opt/zaproxy" ) // Start ZAP at /opt/zaproxy/zap.sh, allowing scans on github.com (if allowedHosts is not provided, any local addresses will be used
+                    startZap(host: "www.google.com", port: 8080, timeout:500 ) // Start ZAP at /opt/zaproxy/zap.sh, allowing scans on github.com (if allowedHosts is not provided, any local addresses will be used
                     runZapCrawler(host: "https://www.google.com")
                 }
             }
