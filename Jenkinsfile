@@ -23,7 +23,7 @@ pipeline {
             }
             steps {
                 script {
-                    sh 'zap-baseline.py -t https://www.google.com -r report.html'
+                    sh 'zap-baseline.py -t https://www.maersk.com -r zapreport.html -T 2'
                 }
             }            
         }
