@@ -4,7 +4,7 @@ pipeline {
       timeout(time: 1, unit: 'HOURS') 
     }
     stages {        
-        stage('Build') { 
+        /*stage('Build') { 
             agent {
                 docker {
                     image 'python:2-alpine' 
@@ -13,7 +13,7 @@ pipeline {
             steps {
                 sh 'python -m py_compile sources/add2vals.py sources/calc.py' 
             }
-        }
+        }*/
         stage('Security Test Zap') {
             agent {
                 docker {
@@ -27,7 +27,7 @@ pipeline {
                 }
             }            
         }
-        stage('httpobs test') { 
+        /*stage('httpobs test') { 
             agent {
                 docker {
                     image 'python:2-alpine' 
@@ -48,6 +48,6 @@ pipeline {
                 sh 'npm install -g observatory-cli'
                 sh 'observatory www.google.com'
             }
-        }
+        }*/
     }  
 }
