@@ -38,6 +38,7 @@ pipeline {
             agent {
                 docker {
                     image 'owasp/zap2docker-stable' 
+                     args '-v /var/jenkins_home:/zap/wrk/:rw'
                 }
             }
             steps {
