@@ -38,24 +38,14 @@ pipeline {
             agent {
                 docker {
                     image 'owasp/zap2docker-stable' 
-                     args '-v /var/jenkins_home:/zap/wrk/:rw'
+                     args '-v /var/jenkins_home/workspaces/samplepython:/zap/wrk/:rw'
                 }
             }
             steps {
                 script {
-                    //startZap(host: "127.0.0.1", port: 9095, timeout:1500 ,zapHome:"/Applications/OWASP ZAP.app/Contents/Java") // Start ZAP at /opt/zaproxy/zap.sh, allowing scans on github.com (if allowedHosts is not provided, any local addresses will be used
-                    //startZap(host: "127.0.0.1", port: 9095, timeout:1500 ,zapHome: "../../zap/") // Start ZAP at /opt/zaproxy/zap.sh, allowing scans on github.com (if allowedHosts is not provided, any local addresses will be used
-                    //runZapCrawler(host: "https://www.google.com")
                     sh 'zap-baseline.py -t https://www.google.com -r testreport.html'
                 }
-            }
-            //post {
-            /*    always {
-                    script {
-                        archiveZap(failAllAlerts: 1, failHighAlerts: 0, failMediumAlerts: 0, failLowAlerts: 0, falsePositivesFilePath: "zapFalsePositives.json")
-                    }
-                }
-            } */
+            }            
         }
     }  
 }
