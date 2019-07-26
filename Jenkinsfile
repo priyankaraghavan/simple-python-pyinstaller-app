@@ -41,7 +41,7 @@ pipeline {
         stage('Security Test Zap') {
             agent {
                 docker {
-                    image 'owasp/zap2docker-stable' 
+                    image 'owasp/zap2docker-weekly' 
                      args '-v /var/jenkins_home/workspaces/samplepython:/zap/wrk/:rw'
                 }
             }
