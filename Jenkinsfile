@@ -34,7 +34,8 @@ pipeline {
             }
             steps {
                 sh 'npm install -g observatory-cli'
-                sh 'observatory www.maersk.com --format=json --min-grade B+'
+                //sh 'observatory www.maersk.com --format=json --min-grade B+'
+                sh 'observatory www.maersk.com --format=json'
             }
         }
         stage('Security Test Zap') {
