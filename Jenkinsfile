@@ -1,6 +1,9 @@
 pipeline {
     agent none 
-    stages {
+    options {
+      timeout(time: 1, unit: 'HOURS') 
+    }
+    stages {        
         stage('Build') { 
             agent {
                 docker {
@@ -20,7 +23,7 @@ pipeline {
             }
             steps {
                 script {
-                    sh 'zap-baseline.py -t https://www.google.com '
+                    sh 'zap-baseline.py -t https://www.google.com -r report.html'
                 }
             }            
         }
