@@ -24,7 +24,7 @@ pipeline {
                 }
             }            
         }
-         stage('httpobs test') { 
+        stage('httpobs test') { 
             agent {
                 docker {
                     image 'python:2-alpine' 
@@ -46,7 +46,5 @@ pipeline {
                 sh 'observatory www.google.com'
             }
         }
-    
-        
     }  
 }
