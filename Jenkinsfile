@@ -54,7 +54,7 @@ pipeline {
             agent {
                 docker {
                     image 'owasp/zap2docker-weekly' 
-                     args '-v /var/jenkins_home/:/zap/wrk/:rw'
+                     args '-v /Users/maersk_mtc03/jenkins_home/:/zap/wrk/:rw'
                 }
             }
             steps {
