@@ -34,7 +34,7 @@ pipeline {
                 }
             }
             steps {
-                sh '-grade -usecache www.maersk.com'                
+                sh 'docker run jumanjiman/ssllabs-scan -grade -usecache www.maersk.com'                
             } 
         }
         stage('Mandatory headers checking with mozilla observatory'){
