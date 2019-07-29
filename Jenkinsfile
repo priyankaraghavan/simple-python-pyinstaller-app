@@ -29,7 +29,7 @@ pipeline {
         stage('SSL labs') { 
             agent {
                 docker {
-                    image 'jumanjiman/ssllabs-scan:latest' 
+                    image 'jumanjiman/ssllabs-scan' 
                      args 'scan_opts="-grade -usecache" url_to_scan=www.maersk.com'
                 }
             }
