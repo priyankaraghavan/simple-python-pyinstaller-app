@@ -26,7 +26,17 @@ pipeline {
                 sh 'httpobs http://www.maersk.com'
             }            
         }
-        stage('Security Test observatory'){
+        stage('SSL labs') { 
+            agent {
+                docker {
+                    image 'jumanjiman/ssllabs-scan:latest' 
+                }
+            }
+            steps {
+                sh '-grade -usecache www.maersk.com'                
+            }            
+        }
+        stage('Mandatory headers checking with mozilla observatory'){
             agent {
                 docker {
                     image 'node:8.16.0-jessie' 
@@ -34,11 +44,11 @@ pipeline {
             }
             steps {
                 sh 'npm install -g observatory-cli'
-                //sh 'observatory www.maersk.com --format=json --min-grade B+'
-                sh 'observatory www.maersk.com --format=json'
+                sh 'observatory www.maersk.com --format=json --min-grade B+'
+                //sh 'observatory www.maersk.com --format=json'
             }
         }
-        stage('Security Test Zap') {
+        stage('DAST with OWASP ZAP') {
             agent {
                 docker {
                     image 'owasp/zap2docker-weekly' 
