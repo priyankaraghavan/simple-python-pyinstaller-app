@@ -30,7 +30,7 @@ pipeline {
             agent {
                 docker {
                     image 'jumanjiman/ssllabs-scan:latest' 
-                     args '-usecache -grade'
+                     //args '-usecache -grade'
 
                 }
             }
