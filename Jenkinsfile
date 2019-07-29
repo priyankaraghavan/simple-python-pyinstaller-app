@@ -30,7 +30,7 @@ pipeline {
             agent {
                 docker {
                     image 'jumanjiman/ssllabs-scan:latest' 
-                    args 'scan_opts=-grade -usecache url_to_scan="www.maersk.com" '
+                     args 'scan_opts="-grade -usecache" url_to_scan=www.maersk.com'
                 }
             }
             /*steps {
