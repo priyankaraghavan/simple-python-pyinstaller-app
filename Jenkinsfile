@@ -15,7 +15,7 @@ pipeline {
             }
         }
         
-        stage('httpobs test') { 
+        stage('Website rating test from Mozilla') { 
             agent {
                 docker {
                     image 'python:2-alpine' 
@@ -26,15 +26,14 @@ pipeline {
                 sh 'httpobs http://www.maersk.com'
             }            
         }
-        stage('SSL labs') { 
+        stage('SSL labs from Qualys') { 
             agent {
                 docker {
-                    image 'jumanjiman/ssllabs-scan' 
-                     
+                    image 'python:2-alpine' 
                 }
             }
             steps {
-                sh 'docker run jumanjiman/ssllabs-scan -grade -usecache www.maersk.com'                
+                sh 'python runssllabs.py'                
             } 
         }
         stage('Mandatory headers checking with mozilla observatory'){
