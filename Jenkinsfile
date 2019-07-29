@@ -1,3 +1,4 @@
+//jenkins file template
 pipeline {
     agent none 
     options {
