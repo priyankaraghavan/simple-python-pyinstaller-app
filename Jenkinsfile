@@ -33,6 +33,7 @@ pipeline {
                 }
             }
             steps {
+                sh 'pip install requests'
                 sh 'python runssllabs.py'                
             } 
         }
