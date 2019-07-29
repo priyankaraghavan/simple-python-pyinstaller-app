@@ -26,18 +26,18 @@ pipeline {
                 sh 'httpobs http://www.maersk.com'
             }            
         }
-        /*stage('SSL labs') { 
+        stage('SSL labs') { 
             agent {
                 docker {
                     image 'jumanjiman/ssllabs-scan:latest' 
-                     args '-usecache -grade www.maersk.com'
+                     args '-usecache -grade'
 
                 }
             }
             steps {
-                sh 'printenv'                
+                sh 'www.maersk.com'                
             }            
-        }*/
+        }
         stage('Mandatory headers checking with mozilla observatory'){
             agent {
                 docker {
