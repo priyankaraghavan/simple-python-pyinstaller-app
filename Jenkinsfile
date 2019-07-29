@@ -33,9 +33,9 @@ pipeline {
                      args 'scan_opts="-grade -usecache" url_to_scan=www.maersk.com'
                 }
             }
-            /*steps {
-                sh 'www.maersk.com'                
-            } */           
+            steps {
+                sh 'printenv'                
+            } 
         }
         stage('Mandatory headers checking with mozilla observatory'){
             agent {
