@@ -30,13 +30,13 @@ pipeline {
             agent {
                 docker {
                     image 'jumanjiman/ssllabs-scan:latest' 
-                     //args '-usecache -grade'
+                     args '-usecache www.maersk.com'
 
                 }
             }
-            steps {
+            /*steps {
                 sh 'www.maersk.com'                
-            }            
+            } */           
         }
         stage('Mandatory headers checking with mozilla observatory'){
             agent {
