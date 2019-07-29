@@ -4,7 +4,7 @@ pipeline {
       timeout(time: 1, unit: 'HOURS') 
     }
     stages {        
-        stage('Build') { 
+        stage('Build and SAST') { 
             agent {
                 docker {
                     image 'python:2-alpine' 
