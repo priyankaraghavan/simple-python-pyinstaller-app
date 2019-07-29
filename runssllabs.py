@@ -6,5 +6,10 @@ def testssllabs(url):
     return data
 
 dat=testssllabs("www.maersk.com")
-with open('ssllabscans.json', 'w') as json_file:
-    json.dump(dat, json_file)
+if(dat is None):
+    print("NO RESULT")
+    exit(1)
+else:    
+    print(dat['endpoints'][0]['grade'])
+    with open('ssllabscans.json', 'w') as json_file:
+        json.dump(dat, json_file)
