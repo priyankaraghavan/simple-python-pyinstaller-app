@@ -5,7 +5,7 @@ pipeline {
       timeout(time: 1, unit: 'HOURS') 
     }
     stages {        
-        stage('Build and SAST') { 
+        stage('Build') { 
             agent {
                 docker {
                     image 'python:2-alpine' 
@@ -14,7 +14,9 @@ pipeline {
             steps {
                 sh 'python -m py_compile sources/add2vals.py sources/calc.py' 
             }
-            steps {
+        }
+        stage('SAST with SONARQUBE') {
+         steps {
                 script {
                     scannerHome = tool name: 'sonarqube'
                 }
