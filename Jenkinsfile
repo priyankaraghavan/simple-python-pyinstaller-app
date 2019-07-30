@@ -18,12 +18,13 @@ pipeline {
         stage('SAST with SONARQUBE') {
          agent none   
          steps {
-                script {
+                /*script {
                  //   scannerHome = tool name: 'sonarqube',type: 'hudson.plugins.sonar.SonarRunnerInstallation'
                  scannerHome = tool 'SonarScanner 4.0';
-                }
+                }*/
                 withSonarQubeEnv('sonarqube') {
-                    sh '${scannerHome}/bin/sonar-scanner'
+                    //sh '${scannerHome}/bin/sonar-scanner'
+                    sh 'sonar-scanner'
                 }
             }
         }
