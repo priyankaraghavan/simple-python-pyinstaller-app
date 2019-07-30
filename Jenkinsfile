@@ -22,10 +22,10 @@ pipeline {
                  //   scannerHome = tool name: 'sonarqube',type: 'hudson.plugins.sonar.SonarRunnerInstallation'
                  scannerHome = tool 'SonarScanner 4.0';
                 }*/
-                withSonarQubeEnv('sonarqube') {
+                //withSonarQubeEnv('sonarqube') {
                     //sh '${scannerHome}/bin/sonar-scanner'
                     sh 'sonar-scanner'
-                }
+                //}
             }
         }
         stage("Quality Gate") {
