@@ -16,12 +16,14 @@ pipeline {
             }
         }
         stage('SAST with SONARQUBE') {
-         
-        // requires SonarQube Scanner 2.8+
-            def scannerHome = tool 'sonarScanner';
-            withSonarQubeEnv('SonarQube 6.2') {
-                sh "${scannerHome}/bin/sonar-runner.bat"
+         steps{
+             script{
+                 scannerHome = tool 'SonarScanner';
+             }
+            withSonarQubeEnv('sonarqube') {
+                sh "${scannerHome}/bin/sonar-scanner"
             }
+         }
         }
         stage("Quality Gate") {
             agent none
