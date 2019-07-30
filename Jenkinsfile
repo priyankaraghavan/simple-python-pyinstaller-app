@@ -16,16 +16,11 @@ pipeline {
             }
         }
         stage('SAST with SONARQUBE') {
-         agent none   
-         steps {
-                /*script {
-                 //   scannerHome = tool name: 'sonarqube',type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                 scannerHome = tool 'SonarScanner 4.0';
-                }*/
-                //withSonarQubeEnv('sonarqube') {
-                    //sh '${scannerHome}/bin/sonar-scanner'
-                    sh 'sonar-scanner'
-                //}
+         
+        // requires SonarQube Scanner 2.8+
+            def scannerHome = tool 'sonarScanner';
+            withSonarQubeEnv('SonarQube 6.2') {
+                sh "${scannerHome}/bin/sonar-runner.bat"
             }
         }
         stage("Quality Gate") {
