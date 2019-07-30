@@ -16,7 +16,9 @@ pipeline {
             }
         }
         stage('SAST with SONARQUBE') {
-         steps{
+         agent { label 'master' }
+         steps{             
+            
              script{
                  scannerHome = tool 'SonarScanner';
              }
@@ -44,7 +46,7 @@ pipeline {
             }
             steps {
                 sh 'pip install httpobs-cli'
-                sh 'httpobs http://www.maersk.com'
+                sh 'httpobs http://www.google.com'
             }            
         }
         stage('SSL labs from Qualys') { 
@@ -67,7 +69,7 @@ pipeline {
             steps {
                 sh 'npm install -g observatory-cli'
                 //sh 'observatory www.maersk.com --format=json --min-grade B+'
-                sh 'observatory www.maersk.com --format=json'
+                sh 'observatory www.google.com --format=json'
             }
         }
         stage('DAST with OWASP ZAP') {
@@ -79,7 +81,7 @@ pipeline {
             }
             steps {
                 script {
-                    sh 'zap-baseline.py -t https://www.maersk.com -r zapreport.html'
+                    sh 'zap-baseline.py -t https://www.google.com -r zapreport.html'
                 }
             }            
         }
