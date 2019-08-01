@@ -37,8 +37,10 @@ pipeline {
                 }
             }
             steps {
-                sh 'pip install httpobs-cli'
-                sh 'httpobs http://www.google.com'
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
+                    sh 'pip install httpobs-cli'
+                    sh 'httpobs www.itsecgames.com'
+                }
             }            
         }
         stage('SSL labs from Qualys') { 
@@ -48,8 +50,10 @@ pipeline {
                 }
             }
             steps {
-                sh 'pip install requests'
-                sh 'python runssllabs.py'                
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
+                    sh 'pip install requests'
+                    sh 'python runssllabs.py'                
+                }
             } 
         }
         stage('Mandatory headers checking with mozilla observatory'){
@@ -59,9 +63,11 @@ pipeline {
                 }
             }
             steps {
-                sh 'npm install -g observatory-cli'
-                //sh 'observatory www.maersk.com --format=json --min-grade B+'
-                sh 'observatory www.google.com --format=json'
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
+                    sh 'npm install -g observatory-cli'
+                    sh 'observatory www.itsecgames.com --format=json --min-grade B+'
+                    //sh 'observatory www.google.com --format=json'
+                }
             }
         }
         stage('DAST with OWASP ZAP') {
@@ -74,12 +80,12 @@ pipeline {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
                     script {
-                        sh 'zap-baseline.py -t https://www.google.com -r JENKINS_ZAP_VULNERABILITY_REPORT.html -x JENKINS_ZAP_VULNERABILITY_REPORT.xml '
+                        sh 'zap-baseline.py -t http://www.itsecgames.com/ -r JENKINS_ZAP_VULNERABILITY_REPORT.html -x JENKINS_ZAP_VULNERABILITY_REPORT.xml '
                     }
                 }
             }            
         }
-        stage("Quality Gate") {
+        stage("SONAR Quality Gate") {
             agent { label 'master' }
             steps {
                 timeout(time: 3, unit: 'MINUTES') {
