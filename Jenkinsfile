@@ -21,7 +21,7 @@ pipeline {
             
              script{
                  scannerHome = tool 'sonar-scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation';
-                 echo scannerHome;
+                 //echo scannerHome;
              }
             withSonarQubeEnv('sonarqube') {
                 /*script{
