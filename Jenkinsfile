@@ -20,7 +20,7 @@ pipeline {
          steps{             
             
              script{
-                 scannerHome = tool 'sonarscanner';
+                 scannerHome = tool 'sonar-scanner';
              }
             withSonarQubeEnv('sonarqube') {
                 //sh "${scannerHome}/sonar-scanner"
