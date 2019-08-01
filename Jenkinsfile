@@ -29,17 +29,7 @@ pipeline {
             }
          }
         }
-        stage("Quality Gate") {
-            agent { label 'master' }
-            steps {
-                timeout(time: 3, unit: 'MINUTES') {
-                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
-                    // true = set pipeline to UNSTABLE, false = don't
-                    // Requires SonarQube Scanner for Jenkins 2.7+
-                    waitForQualityGate abortPipeline: true
-                }
-            }
-        }
+        
         stage('Website rating test from Mozilla') { 
             agent {
                 docker {
@@ -86,6 +76,17 @@ pipeline {
                     sh 'zap-baseline.py -t https://www.google.com -r JENKINS_ZAP_VULNERABILITY_REPORT.html -x JENKINS_ZAP_VULNERABILITY_REPORT.xml '
                 }
             }            
+        }
+        stage("Quality Gate") {
+            agent { label 'master' }
+            steps {
+                timeout(time: 3, unit: 'MINUTES') {
+                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+                    // true = set pipeline to UNSTABLE, false = don't
+                    // Requires SonarQube Scanner for Jenkins 2.7+
+                    waitForQualityGate abortPipeline: true
+                }
+            }
         }
     }  
 }
