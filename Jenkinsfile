@@ -78,12 +78,12 @@ pipeline {
             agent {
                 docker {
                     image 'owasp/zap2docker-weekly' 
-                     args '-v /Users/maersk_mtc03/jenkins_home/:/zap/wrk/:rw'
+                     args '-v /Users/maersk_mtc03/jenkins_home/workspace/samplepython/report:/zap/wrk/:rw'
                 }
             }
             steps {
                 script {
-                    sh 'zap-baseline.py -t https://www.google.com -r zapreport.html'
+                    sh 'zap-baseline.py -t https://www.google.com -r JENKINS_ZAP_VULNERABILITY_REPORT.html'
                 }
             }            
         }
