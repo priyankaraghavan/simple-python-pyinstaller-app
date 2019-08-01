@@ -23,8 +23,8 @@ pipeline {
                  scannerHome = tool 'sonar-scanner';
              }
             withSonarQubeEnv('sonarqube') {
-                //sh "${scannerHome}/sonar-scanner"
-                sh "sonar-scanner"
+                sh "${scannerHome}/sonar-scanner"
+                //sh "sonar-scanner"
             }
          }
         }
