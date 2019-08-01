@@ -24,21 +24,15 @@ pipeline {
                  echo scannerHome;
              }
             withSonarQubeEnv('sonarqube') {
-                /*script{
-                    scannerHome = tool 'sonar-scanner';
-                }*/
-                
-                sh "pwd;ls -l ${scannerHome};${scannerHome}/sonar-scanner -X"
-
-                //sh '''$(scannerHome)/sonar-scanner -X'''
-                //sh "sonar-scanner"
+                               
+                sh "pwd;ls -l ${scannerHome};${scannerHome}/sonar-scanner -X"                
             }
          }
         }
         stage("Quality Gate") {
-            agent none
+            agent { label 'master' }
             steps {
-                timeout(time: 1, unit: 'HOURS') {
+                timeout(time: 3, unit: 'minute') {
                     // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
                     // true = set pipeline to UNSTABLE, false = don't
                     // Requires SonarQube Scanner for Jenkins 2.7+
