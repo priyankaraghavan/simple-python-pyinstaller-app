@@ -32,7 +32,7 @@ pipeline {
         stage("Quality Gate") {
             agent { label 'master' }
             steps {
-                timeout(time: 3, unit: 'minute') {
+                timeout(time: 3, unit: 'MINUTES') {
                     // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
                     // true = set pipeline to UNSTABLE, false = don't
                     // Requires SonarQube Scanner for Jenkins 2.7+
