@@ -72,8 +72,10 @@ pipeline {
                 }
             }
             steps {
-                script {
-                    sh 'zap-baseline.py -t https://www.google.com -r JENKINS_ZAP_VULNERABILITY_REPORT.html -x JENKINS_ZAP_VULNERABILITY_REPORT.xml '
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
+                    script {
+                        sh 'zap-baseline.py -t https://www.google.com -r JENKINS_ZAP_VULNERABILITY_REPORT.html -x JENKINS_ZAP_VULNERABILITY_REPORT.xml '
+                    }
                 }
             }            
         }
