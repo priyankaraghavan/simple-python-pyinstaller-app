@@ -28,7 +28,7 @@ pipeline {
                     scannerHome = tool 'sonar-scanner';
                 }*/
                 
-                sh "pwd;ls -l;${scannerHome}/bin/sonar-scanner -X"
+                sh "pwd;ls -l ${scannerHome};${scannerHome}/sonar-scanner -X"
 
                 //sh '''$(scannerHome)/sonar-scanner -X'''
                 //sh "sonar-scanner"
