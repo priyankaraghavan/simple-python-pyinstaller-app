@@ -20,14 +20,16 @@ pipeline {
          steps{             
             
              script{
-                 scannerHome = tool 'sonar-scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation';
-                 //echo scannerHome;
+                 scannerHome = tool 'sonar-scanner';
+                 echo scannerHome;
              }
             withSonarQubeEnv('sonarqube') {
                 /*script{
                     scannerHome = tool 'sonar-scanner';
                 }*/
-                sh "${scannerHome}/bin/sonar-scanner -X"
+                
+                sh "pwd;ls -l;${scannerHome}/bin/sonar-scanner -X"
+
                 //sh '''$(scannerHome)/sonar-scanner -X'''
                 //sh "sonar-scanner"
             }
