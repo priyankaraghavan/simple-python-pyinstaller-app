@@ -38,7 +38,7 @@ pipeline {
             }
             steps {
                 //catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
-                catchError(build.result: 'SUCCESS', stage.result: 'FAILURE'){
+                catchError( (build.result) : 'SUCCESS', (stage.result) : 'FAILURE'){
                     sh 'pip install httpobs-cli'
                     sh 'httpobs www.itsecgames.com'
                 }
