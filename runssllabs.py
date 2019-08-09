@@ -33,6 +33,6 @@ def main():
         if(r1!='A'):
            print("Failure!Rating is"+r1)
            exit(1)
-         else:    
+        else:    
             print("Success!Rating is"+r1)
 main()
