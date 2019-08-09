@@ -4,7 +4,7 @@ pipeline {
     options {
       timeout(time: 1, unit: 'HOURS') 
     }
-    stages {        
+    /*stages {        
         stage('Build') { 
             agent {
                 docker {
@@ -14,7 +14,7 @@ pipeline {
             steps {
                 sh 'python -m py_compile sources/add2vals.py sources/calc.py' 
             }
-        }
+        }*/
         /*stage('SAST with SONARQUBE') {
          agent { label 'master' }
          steps{             
@@ -72,7 +72,7 @@ pipeline {
                 }
             } 
         }
-        stage('Mandatory headers checking with mozilla observatory'){
+        /*stage('Mandatory headers checking with mozilla observatory'){
             agent {
                 docker {
                     image 'node:8.16.0-jessie' 
@@ -100,7 +100,7 @@ pipeline {
                     }
                 }
             }            
-        }
+        }*/
         stage("SONAR Quality Gate") {
             agent { label 'master' }
             steps {
