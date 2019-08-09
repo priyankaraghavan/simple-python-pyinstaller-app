@@ -63,7 +63,7 @@ pipeline {
                     sh 'pip install requests'
                     sh 'pip install azure-nspkg'
                     sh 'pip install azure-common'
-                    sh 'pip install azure-storage-queue'
+                    //sh 'pip install azure-storage-queue'
                     sh 'pip install azure-storage-blob'   
 
                     sh '''python runssllabs.py "sqlva5n7utjk3i7qwm" $AZUREBLOB_PSW "securityscanresults" "sslabs" "ssllabscans.json" "www.google.com"'''                
