@@ -53,11 +53,11 @@ pipeline {
                 }
             }
             environment {
-                AZUREBLOB_CREDS = credentials('azureblob')
+                AZUREBLOB = credentials('azureblob')
             }
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
-                    sh 'echo $(AZUREBLOB_CREDS) $(AZUREBLOB_CREDS_PSW)'
+                    sh 'echo $(AZUREBLOB) $(AZUREBLOB_PSW)'
                     sh 'pip install requests'
                     sh '''python runssllabs.py "sqlva5n7utjk3i7qwm" $(AZUREBLOB_CREDS_PSW) "securityscanresults" "sslabs" "ssllabscans.json" "www.itsecgames.com"'''                
                 }
