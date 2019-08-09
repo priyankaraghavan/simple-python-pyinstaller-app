@@ -50,7 +50,7 @@ pipeline {
             agent {
                 docker {
                     image 'python:2-alpine'
-                    args 'apk add gcc' 
+                     
                 }
             }
             environment {
@@ -58,6 +58,9 @@ pipeline {
             }
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){                    
+                    sh 'RUN apk add --no-cache --virtual .build-deps gcc musl-dev'
+                    sh 'RUN pip install cython'
+                    sh 'RUN apk del .build-deps gcc musl-dev'                    
                     sh 'pip install --upgrade pip'                    
                     sh 'pip install gcc'
                     sh 'pip install requests'
