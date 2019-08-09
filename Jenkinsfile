@@ -49,7 +49,7 @@ pipeline {
         stage('SSL labs from Qualys') { 
             agent {
                 docker {
-                    image 'python2-dev'
+                    image 'python3'
                      
                 }
             }
