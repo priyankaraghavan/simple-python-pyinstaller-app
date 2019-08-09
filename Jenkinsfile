@@ -20,12 +20,15 @@ pipeline {
          steps{             
             
              script{
-                 scannerHome = tool 'sonar-scanner';
-                 echo scannerHome;
+                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
+                    scannerHome = tool 'sonar-scanner';
+                    echo scannerHome;
+                 }
              }
             withSonarQubeEnv('sonarqube') {
-                               
-                sh "pwd;ls -l ${scannerHome};${scannerHome}/sonar-scanner -X"                
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){               
+                    sh "pwd;ls -l ${scannerHome};${scannerHome}/sonar-scanner -X"                
+                }
             }
          }
         }
