@@ -15,7 +15,7 @@ pipeline {
                 sh 'python -m py_compile sources/add2vals.py sources/calc.py' 
             }
         }
-        stage('SAST with SONARQUBE') {
+        /*stage('SAST with SONARQUBE') {
          agent { label 'master' }
          steps{             
             
@@ -45,11 +45,11 @@ pipeline {
                     sh 'httpobs www.itsecgames.com'
                 }
             }            
-        }
+        }*/
         stage('SSL labs from Qualys') { 
             agent {
                 docker {
-                    image 'python:2-alpine' 
+                    image 'python:3-alpine' 
                 }
             }
             environment {
