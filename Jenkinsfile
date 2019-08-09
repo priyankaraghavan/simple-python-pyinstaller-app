@@ -58,9 +58,9 @@ pipeline {
             }
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){                    
-                    sh 'RUN apk add --no-cache --virtual .build-deps gcc musl-dev'
-                    sh 'RUN pip install cython'
-                    sh 'RUN apk del .build-deps gcc musl-dev'                    
+                    sh 'apk add --no-cache --virtual .build-deps gcc musl-dev'
+                    sh 'pip install cython'
+                    sh 'apk del .build-deps gcc musl-dev'                    
                     sh 'pip install --upgrade pip'                                        
                     sh 'pip install requests'
                     sh 'pip install azure-nspkg'
