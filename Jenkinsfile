@@ -58,13 +58,14 @@ pipeline {
             }
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){                    
-                    sh 'apk add --no-cache --virtual .build-deps gcc musl-dev && pip install cython && apk del .build-deps gcc musl-dev'                   
-                                                        
                     sh 'pip install requests'
                     sh 'pip install azure-nspkg'
                     sh 'pip install azure-common'
+                    sh 'apk add --no-cache --virtual .build-deps gcc musl-dev && pip install cython && apk del .build-deps gcc musl-dev && pip install azure-storage-blob'                   
+                                                        
+                    
                     //sh 'pip install azure-storage-queue'
-                    sh 'pip install azure-storage-blob'   
+                    //sh 'pip install azure-storage-blob'   
 
                     sh '''python runssllabs.py "sqlva5n7utjk3i7qwm" $AZUREBLOB_PSW "securityscanresults" "sslabs" "ssllabscans.json" "www.google.com"'''                
                 }
