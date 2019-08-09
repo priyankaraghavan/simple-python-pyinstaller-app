@@ -57,7 +57,8 @@ pipeline {
             }
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){                    
-                    sh 'pip install --upgrade pip'
+                    sh 'pip install --upgrade pip'                    
+                    sh 'pip install gcc'
                     sh 'pip install requests'
                     sh 'pip install azure-nspkg'
                     sh 'pip install azure-common'
