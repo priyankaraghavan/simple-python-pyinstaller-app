@@ -53,7 +53,10 @@ pipeline {
                 }
             }
             environment {
-                AZUREBLOB = credentials('azureblob')
+                AZUREBLOB = credentials('AZUREBLOB_CREDS')
+                script{
+                    'echo $(AZUREBLOB) $(AZUREBLOB_PSW)'
+                }
             }
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
