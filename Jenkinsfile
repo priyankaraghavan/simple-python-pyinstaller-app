@@ -49,7 +49,8 @@ pipeline {
         stage('SSL labs from Qualys') { 
             agent {
                 docker {
-                    image 'python:3-alpine' 
+                    image 'python:2-alpine'
+                    args 'apk add gcc' 
                 }
             }
             environment {
