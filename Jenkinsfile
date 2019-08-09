@@ -57,7 +57,7 @@ pipeline {
             }
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
-                    sh 'echo $(AZUREBLOB) $(AZUREBLOB_PSW)'
+                    sh 'echo $AZUREBLOB $(AZUREBLOB_PSW)'
                     sh 'pip install requests'
                     sh '''python runssllabs.py "sqlva5n7utjk3i7qwm" $(AZUREBLOB_CREDS_PSW) "securityscanresults" "sslabs" "ssllabscans.json" "www.itsecgames.com"'''                
                 }
