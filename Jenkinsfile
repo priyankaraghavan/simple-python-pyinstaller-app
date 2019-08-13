@@ -9,9 +9,7 @@ pipeline {
                 AZUREBLOB = credentials('AZUREBLOB_CREDS') 
                 DOCKERCRED= credentials('dockercredential')               
             }  
-            steps {
-                sh 'docker login -u ${DOCKERCRED_USR} -p ${DOCKERCRED_PSW}' 
-            }     
+                
     /*    stage('Build') { 
             agent {
                 docker {
@@ -64,7 +62,9 @@ pipeline {
                     image 'python2-dev '                    
                 }
             }
-            
+             steps {
+                sh 'docker login -u ${DOCKERCRED_USR} -p ${DOCKERCRED_PSW}' 
+            }
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){                    
                     //sh 'apk add --no-cache --virtual .build-deps gcc musl-dev && pip install cython && apk del .build-deps gcc musl-dev && pip install azure-storage-blob'                   
