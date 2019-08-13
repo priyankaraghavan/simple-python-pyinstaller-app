@@ -58,10 +58,11 @@ pipeline {
             }
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){                    
+                    sh 'apk add --no-cache --virtual .build-deps gcc musl-dev && pip install cython && apk del .build-deps gcc musl-dev && pip install azure-storage-blob'                   
                     sh 'pip install requests'
                     sh 'pip install azure-nspkg'
                     sh 'pip install azure-common'
-                    sh 'apk add --no-cache --virtual .build-deps gcc musl-dev && pip install cython && apk del .build-deps gcc musl-dev && pip install azure-storage-blob'                   
+                    
                                                         
                     
                     //sh 'pip install azure-storage-queue'
