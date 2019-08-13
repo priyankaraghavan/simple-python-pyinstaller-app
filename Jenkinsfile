@@ -51,7 +51,7 @@ pipeline {
                 docker {
                     //image 'python:2-alpine'
                     image 'python2-dev'
-                     
+                    imagePullSecrets 'dockercredential'  
                 }
             }
             environment {
