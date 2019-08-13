@@ -4,7 +4,14 @@ pipeline {
     options {
       timeout(time: 1, unit: 'HOURS') 
     }
-    stages {        
+    stages { 
+        environment {
+                AZUREBLOB = credentials('AZUREBLOB_CREDS') 
+                DOCKERCRED= credentials('dockercredential')               
+            }  
+            steps {
+                sh 'docker login -u ${DOCKERCRED_USR} -p ${DOCKERCRED_PSW}' 
+            }     
     /*    stage('Build') { 
             agent {
                 docker {
@@ -47,16 +54,17 @@ pipeline {
             }            
         }*/
         stage('SSL labs from Qualys') { 
+            environment {
+                AZUREBLOB = credentials('AZUREBLOB_CREDS') 
+                DOCKERCRED= credentials('dockercredential')               
+            }
             agent {
                 docker {
                     //image 'python:2-alpine'
-                    image 'python2-dev'
-                    imagePullSecrets 'dockercredential'  
+                    image 'python2-dev '                    
                 }
             }
-            environment {
-                AZUREBLOB = credentials('AZUREBLOB_CREDS')               
-            }
+            
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){                    
                     //sh 'apk add --no-cache --virtual .build-deps gcc musl-dev && pip install cython && apk del .build-deps gcc musl-dev && pip install azure-storage-blob'                   
