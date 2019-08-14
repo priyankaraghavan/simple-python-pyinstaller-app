@@ -2,6 +2,7 @@
 import sys
 import ssllabscanner
 import json
+import Writetoblob
 from azure.storage.blob import BlockBlobService
 from azure.storage.blob import ContentSettings
 
@@ -25,10 +26,11 @@ def main():
         r1=dat['endpoints'][0]['grade']
         with open(jsonname, 'w') as json_file:
             json.dump(dat, json_file)
-        block_blob_service = BlockBlobService(account_name=accountname, account_key=accountkey)
-        print("Blob service")
-        print(block_blob_service)
-        block_blob_service.create_blob_from_path(containername,blobname,jsonname, content_settings=ContentSettings(content_type='json'))
+        #block_blob_service = BlockBlobService(account_name=accountname, account_key=accountkey)
+        #print("Blob service")
+        #print(block_blob_service)
+        #block_blob_service.create_blob_from_path(containername,blobname,jsonname, content_settings=ContentSettings(content_type='json'))
+        writetoAzure(accountname,accountkey,conatinername,blobname,jsonname)
         print("Rating is:",r1)
         if(r1!='A'):
            print("Failure!Rating is"+r1)
