@@ -65,10 +65,11 @@ pipeline {
                     //sh 'apt-get install gcc'
                     //sh 'curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py'
                     //sh 'python get-pip.py'
-                    sh 'pip install azure-storage-blob'
-                    sh 'pip install requests'
-                    sh 'pip install azure-nspkg'
-                    sh 'pip install azure-common'
+                    sh 'python3-pip install requests'
+                    sh 'python3-pip install azure-nspkg'
+                    sh 'python3-pip install azure-common'
+                    sh 'python3-pip install azure-storage-blob'
+                    
                     
                                                         
                     
