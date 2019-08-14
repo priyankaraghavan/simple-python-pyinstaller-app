@@ -54,7 +54,7 @@ pipeline {
             agent {
                 docker {
                     //image 'python:2-alpine'
-                    image 'devartis/python3-dev'                    
+                    image 'therealwardo/python3-dev'                    
                 }
             }             
             steps {
