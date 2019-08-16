@@ -71,16 +71,21 @@ pipeline {
             } 
         }
         stage('Mandatory headers checking with mozilla observatory'){
+             environment {
+                AZUREBLOB = credentials('AZUREBLOB_CREDS') 
+                DOCKERCRED= credentials('dockercredential')               
+            }
             agent {
                 docker {
                     image 'node:8.16.0-jessie' 
                 }
+               
             }
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
                     sh 'npm install -g observatory-cli'
-                    sh 'observatory www.itsecgames.com --format=json --min-grade B+'
-                    //sh 'observatory www.google.com --format=json'
+                    sh 'observatory www.itsecgames.com --format=json > headersResults.json'
+                    sh 'python Writetoblob.py "sqlva5n7utjk3i7qwm" $AZUREBLOB_PSW "securityscanresults" "headersResults" "headersResults.json"'                    
                 }
             }
         }
@@ -88,7 +93,8 @@ pipeline {
             agent {
                 docker {
                     image 'owasp/zap2docker-weekly' 
-                     args '-v /Users/maersk_mtc03/jenkins_home/workspace/samplepython/report:/zap/wrk/:rw'
+                     //args '-v /Users/maersk_mtc03/jenkins_home/workspace/samplepython/report:/zap/wrk/:rw'
+                     args '-v https://sqlva5n7utjk3i7qwm.blob.core.windows.net/securityscanresults:/zap/wrk/:rw'
                 }
             }
             steps {
