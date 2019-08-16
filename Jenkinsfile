@@ -85,6 +85,13 @@ pipeline {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
                     sh 'npm install -g observatory-cli'
                     sh 'observatory www.itsecgames.com --format=json > headersResults.json'
+                    sh 'curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py'
+                    sh 'python get-pip.py'                    
+                    sh 'pip install azure-nspkg'
+                    sh 'pip install azure-common'
+                    sh 'pip install azure-storage-blob'
+                    sh 'pip install azure-storage-queue'
+                    sh 'pip install requests'
                     sh 'python Writetoblob.py "sqlva5n7utjk3i7qwm" $AZUREBLOB_PSW "securityscanresults" "headersResults" "headersResults.json"'                    
                 }
             }
