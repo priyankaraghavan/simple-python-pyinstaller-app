@@ -1,6 +1,9 @@
+#!/usr/bin/env python
+import sys
 from azure.storage.blob import BlockBlobService
 from azure.storage.blob import ContentSettings
-import sys
+
+
 def Writetoblob(accountname,accountkey,containername,blobname,filename):    
     block_blob_service = BlockBlobService(account_name=accountname, account_key=accountkey)
     print("Blob service")
