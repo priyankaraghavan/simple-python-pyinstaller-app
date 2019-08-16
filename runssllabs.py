@@ -30,7 +30,7 @@ def main():
         #print("Blob service")
         #print(block_blob_service)
         #block_blob_service.create_blob_from_path(containername,blobname,jsonname, content_settings=ContentSettings(content_type='json'))
-        Writetoblob(accountname,accountkey,conatinername,blobname,jsonname)
+        Writetoblob(accountname,accountkey,containername,blobname,jsonname)
         print("Rating is:",r1)
         if(r1!='A'):
            print("Failure!Rating is"+r1)
