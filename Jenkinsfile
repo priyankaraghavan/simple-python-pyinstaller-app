@@ -5,7 +5,7 @@ pipeline {
       timeout(time: 1, unit: 'HOURS') 
     }
     stages {    
-        /*stage('Build') { 
+        stage('Build') { 
             agent {
                 docker {
                     image 'python:2-alpine' 
@@ -69,7 +69,7 @@ pipeline {
                     sh '''python runssllabs.py "sqlva5n7utjk3i7qwm" $AZUREBLOB_PSW "securityscanresults" "sslabs" "ssllabscans.json" "www.google.com"'''                
                 }
             } 
-        }*/
+        }
         stage('Mandatory headers checking with mozilla observatory'){
              environment {
                 AZUREBLOB = credentials('AZUREBLOB_CREDS') 
@@ -96,7 +96,7 @@ pipeline {
                 }
             }
         }
-        /*stage('DAST with OWASP ZAP') {
+        stage('DAST with OWASP ZAP') {
             agent {
                 docker {
                     image 'owasp/zap2docker-weekly' 
@@ -122,6 +122,6 @@ pipeline {
                     waitForQualityGate abortPipeline: true
                 }
             }
-        }*/
+        }
     }  
 }
