@@ -5,6 +5,7 @@ import json
 import Writetoblob
 from azure.storage.blob import BlockBlobService
 from azure.storage.blob import ContentSettings
+import time
 
 def testssllabs(url):
     data = ssllabscanner.newScan(url)
@@ -25,14 +26,11 @@ def main():
     else:    
         r1=dat['endpoints'][0]['grade']
         with open(jsonname, 'w') as json_file:
-            json.dump(dat, json_file)
-        #block_blob_service = BlockBlobService(account_name=accountname, account_key=accountkey)
-        #print("Blob service")
-        #print(block_blob_service)
-        #block_blob_service.create_blob_from_path(containername,blobname,jsonname, content_settings=ContentSettings(content_type='json'))
+            json.dump(dat, json_file)  
+        time.sleep(30)          
         Writetoblob.Writetoblob(accountname,accountkey,containername,blobname,jsonname)
         print("Rating is:",r1)
-        if(r1!='A'):
+        if(r1!='A' or r1!='A+'):
            print("Failure!Rating is"+r1)
            exit(1)
         else:    
