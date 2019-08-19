@@ -5,7 +5,7 @@ pipeline {
       timeout(time: 1, unit: 'HOURS') 
     }
     stages {    
-        stage('Build') { 
+        /*stage('Build') { 
             agent {
                 docker {
                     image 'python:2-alpine' 
@@ -65,11 +65,11 @@ pipeline {
                     sh 'pip install azure-storage-blob'
                     sh 'pip install azure-storage-queue'
                     sh 'pip install requests'
-
+                    sh 'ls -l'
                     sh '''python runssllabs.py "sqlva5n7utjk3i7qwm" $AZUREBLOB_PSW "securityscanresults" "sslabs" "ssllabscans.json" "www.google.com"'''                
                 }
             } 
-        }
+        }*/
         stage('Mandatory headers checking with mozilla observatory'){
              environment {
                 AZUREBLOB = credentials('AZUREBLOB_CREDS') 
@@ -92,16 +92,16 @@ pipeline {
                     sh 'pip install azure-storage-blob'
                     sh 'pip install azure-storage-queue'
                     sh 'pip install requests'
-                    sh '''python -c 'import Writetoblob; Writetoblob.Writetoblob("sqlva5n7utjk3i7qwm",$AZUREBLOB_PSW,"securityscanresults","headersResults","headersResults.json")' '''                    
+                    sh '''python -c 'import Writetoblob; Writetoblob.Writetoblob("sqlva5n7utjk3i7qwm","$AZUREBLOB_PSW","securityscanresults","headersResults","headersResults.json")' '''                    
                 }
             }
         }
-        stage('DAST with OWASP ZAP') {
+        /*stage('DAST with OWASP ZAP') {
             agent {
                 docker {
                     image 'owasp/zap2docker-weekly' 
-                     //args '-v /Users/maersk_mtc03/jenkins_home/workspace/samplepython/report:/zap/wrk/:rw'
-                     args '-v https://sqlva5n7utjk3i7qwm.blob.core.windows.net/securityscanresults:/zap/wrk/:rw'
+                     args '-v /Users/maersk_mtc03/jenkins_home/workspace/samplepython/report:/zap/wrk/:rw'
+                     //args '-v https://sqlva5n7utjk3i7qwm.blob.core.windows.net/securityscanresults:/zap/wrk/:rw'
                 }
             }
             steps {
@@ -122,6 +122,6 @@ pipeline {
                     waitForQualityGate abortPipeline: true
                 }
             }
-        }
+        }*/
     }  
 }
