@@ -92,6 +92,8 @@ pipeline {
                     sh 'pip install azure-storage-blob'
                     sh 'pip install azure-storage-queue'
                     sh 'pip install requests'
+                    sh 'ls -l'
+                    sh 'echo $AZUREBLOB_PSW'
                     sh '''python -c 'import Writetoblob; Writetoblob.Writetoblob("sqlva5n7utjk3i7qwm","$AZUREBLOB_PSW","securityscanresults","headersResults","headersResults.json")' '''                    
                 }
             }
