@@ -1,3 +1,4 @@
+
 # simple-python-pyinstaller-app
 
 This repository is for the
@@ -16,3 +17,6 @@ and execute at the command line on Linux machines without Python.
 
 The `jenkins` directory contains an example of the `Jenkinsfile` (i.e. Pipeline)
 you'll be creating yourself during the tutorial.
+
+#DevSecOps
+The repo shows you different open source tools for doing DevSecOps
